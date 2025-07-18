@@ -61,8 +61,11 @@ public:
     void unite(int x, int y) {
         int rootX = find(x);
         int rootY = find(y);
-        if (rootX != rootY)
-            parent[rootY] = rootX;
+        if (rootX != rootY) {
+            if (rootX < rootY)
+                parent[rootY] = rootX;
+            parent[rootX] = rootY;
+        }
     }
 };
 

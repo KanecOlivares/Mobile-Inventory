@@ -24,6 +24,7 @@ class Date {
     bool operator>(const Date& other){
         /*
          * Current_Date > Other_Date
+         * is current date in the future compared to other date
          */
         if (year > other.year)
             return true;
@@ -38,6 +39,7 @@ class Date {
     bool operator<(const Date& other){
         /*
          * Current_Date < Other_Date
+         * Is current_date earlier than other_date?
          */
         if (year < other.year)
             return true;
