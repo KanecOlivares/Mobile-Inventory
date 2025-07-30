@@ -1,5 +1,5 @@
 //
-// Created by KanecO on 6/23/25.
+//
 //
 
 #ifndef MOBILEINVENTORY_DATE_H

@@ -14,6 +14,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobileinventory.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.io.File
+import java.io.RandomAccessFile
 
 class MainActivity : AppCompatActivity() {
 
@@ -75,12 +77,12 @@ class MainActivity : AppCompatActivity() {
     private fun showOptionsDialog() {
         val options = arrayOf("Pick-Up (Adding)", "Delivery (Taking Away)",
             "View Stock")
-        var selectedIndex = 0  // Optional: default selected
+
+        var selectedIndex = -1 // optional INVALID choice
 
         MaterialAlertDialogBuilder(this)
             .setTitle("Inventory")
             .setSingleChoiceItems(options, selectedIndex) { _, which ->
-                // Save selected index
                 selectedIndex = which
             }
             .setPositiveButton("OK") { dialog, _ ->
@@ -125,4 +127,79 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    fun saveCsvFile(filename: String = "Inventory.csv", data: List<List<String>>) {
+        /*
+        filename: Item name
+        data:
+        val sampleData = listOf(
+        listOf("Chair", "Age", "Email"),
+        listOf("Alice", "30", "alice@example.com"),
+        listOf("Bob", "25", "bob@example.com")
+        )
+         */
+        val file = File(this.filesDir, filename)
+
+        file.bufferedWriter().use { writer ->
+            for (row in data) {
+                val line = row.joinToString(",") // Join each row by commas
+                writer.write(line)
+                writer.newLine()
+            }
+        }
+
+        Toast.makeText(this, "CSV saved to ${file.absolutePath}", Toast.LENGTH_SHORT).show()
+    }
+
+    fun readNewCsvRows(filename: String = "Inventory.csv"): List<List<String>> {
+        /*
+        Returns a List of new rows added to the CSV. This is done due to the fact CSV Item files
+        will only be added to not deleted or updated as that is modifying the books.
+         */
+        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val lastOffset = prefs.getLong("csv_last_read_offset", 0L)
+
+        val file = RandomAccessFile(File(filesDir, filename), "r")
+        val newRows = mutableListOf<List<String>>()
+
+        try {
+            // Move to the last read position
+            file.seek(lastOffset)
+
+            var line: String?
+            while (file.readLine().also { line = it } != null) {
+                line?.let {
+                    // Basic CSV parsing by splitting on commas
+                    newRows.add(it.split(","))
+                }
+            }
+
+            // Save new offset for next time
+            prefs.edit().putLong("csv_last_read_offset", file.filePointer).apply()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            file.close()
+        }
+
+        return newRows
+    }
+
+    fun readCsvFile(filename: String = "Inventory.csv"): List<List<String>> {
+        /*
+        Reads entire CSV File probably will be used for import Item. IN THE FUTURE
+         */
+        val file = File(this.filesDir, filename)
+        val rows = mutableListOf<List<String>>()
+
+        file.bufferedReader().useLines { lines ->
+            lines.forEach { line ->
+                rows.add(line.split(","))
+            }
+        }
+
+        return rows
+    }
+
 }

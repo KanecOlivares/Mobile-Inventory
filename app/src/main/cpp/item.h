@@ -1,9 +1,12 @@
 //
-// Created by KanecO on 7/18/25.
+//
 //
 
 #ifndef MOBILEINVENTORY_ITEM_H
 #define MOBILEINVENTORY_ITEM_H
+#include <iostream>
+#include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <tuple>
@@ -12,13 +15,14 @@
 
 
 class Item {
+    int id;
     int count;
     std::string name;
     std::vector<std::tuple<Item, Date>> updates;
 
-    Item(std::string given_name, int given_count, Date given_date) : name(std::move(given_name)),
+    Item(int item_id, std::string given_name, int given_count, Date given_date) : id(item_id), name(std::move(given_name)),
     count(given_count) {
-        updates.update(); // add function for updating the vector
+
     }
 
 };
