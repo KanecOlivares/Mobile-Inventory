@@ -6,7 +6,7 @@ CXX_DEFINES =
 
 CXX_INCLUDES = 
 
-CXX_FLAGSarm64 = -std=gnu++11 -arch arm64
+CXX_FLAGSarm64 = -std=gnu++11 -arch arm64 --coverage
 
-CXX_FLAGS = -std=gnu++11 -arch arm64
+CXX_FLAGS = -std=gnu++11 -arch arm64 --coverage
 

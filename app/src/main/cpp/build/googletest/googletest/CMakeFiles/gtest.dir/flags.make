@@ -6,7 +6,7 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/googletest/googletest/include -I/Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/googletest/googletest
 
-CXX_FLAGSarm64 = -std=c++17 -arch arm64  -DGTEST_HAS_PTHREAD=1  
+CXX_FLAGSarm64 = -std=c++17 -arch arm64  -DGTEST_HAS_PTHREAD=1   --coverage
 
-CXX_FLAGS = -std=c++17 -arch arm64  -DGTEST_HAS_PTHREAD=1  
+CXX_FLAGS = -std=c++17 -arch arm64  -DGTEST_HAS_PTHREAD=1   --coverage
 

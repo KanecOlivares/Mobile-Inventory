@@ -1,3 +1,4 @@
+/Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/build/CMakeFiles/coverage.dir
 /Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/build/CMakeFiles/native-lib.dir
 /Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/build/CMakeFiles/test_all.dir
 /Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/build/CMakeFiles/test.dir

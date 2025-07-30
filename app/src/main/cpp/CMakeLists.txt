@@ -1,44 +1,45 @@
-#cmake_minimum_required(VERSION 3.4.1)
-#
-#add_library( # Library name
-#        native-lib
-#        SHARED
-#        native-lib.cpp )
-#
-#find_library( # Android log lib
-#        log-lib
-#        log )
-#
-#target_link_libraries( # Link native-lib with Android log
-#        native-lib
-#        ${log-lib} )
-#
-## Add googletest source
-#add_subdirectory(googletest)
-#
-#add_executable(
-#        unit_tests
-#        test/gt-date.cpp
-#)
-#
-## Link the test executable with gtest and gtest_main
-#target_link_libraries(
-#        unit_tests
-#        gtest
-#        gtest_main
-#        ${log-lib}
-#)
-#
-#set_property(TARGET unit_tests PROPERTY CXX_STANDARD 11)
 # cd into build so pwd = MobileInventory/app/src/main/cpp/build
+# Choose which one. One doesn't have the flags enabled other does
 # cmake ..
-# make
+#   make
+#   ./test-all
+# cmake -DENABLE_COVERAGE=ON ..
+#   make
+#   ./test_all
+#   make coverage
+#   open coverage_report/index.html
+#
+
 # ./all_tests --gtest_filter=
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 project(NativeLibTest)
+
+option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(ENABLE_COVERAGE)
+    set(ENV{GCOV} "gcov-15")
+    message(STATUS "Coverage enabled")
+    add_compile_options(--coverage)
+    add_link_options(--coverage)
+    find_program(LCOV_PATH lcov)
+    find_program(GENHTML_PATH genhtml)
+
+    if(LCOV_PATH AND GENHTML_PATH)
+        # Custom target to generate coverage report
+        add_custom_target(coverage
+                COMMAND ${LCOV_PATH} --directory . --capture --output-file coverage.info --ignore-errors inconsistent,unsupported
+                COMMAND ${GENHTML_PATH} coverage.info --output-directory coverage_report
+                WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+                COMMENT "Generating coverage report with lcov and genhtml"
+                VERBATIM
+        )
+    else()
+        message(WARNING "lcov or genhtml not found! Coverage report won't be generated.")
+    endif()
+endif()
 
 # Native code library
 add_library(native-lib STATIC native-lib.cpp)
