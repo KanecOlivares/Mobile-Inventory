@@ -63,11 +63,11 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun handlePickup(){
-        debug_msg("handlePickup not implemented yet")
+    private fun handlePickupDelivery(){
+        debug_msg("handlePickupDelivery not implemented yet")
     }
-    private fun handleDelivery(){
-        debug_msg("handleDelivery not implemented yet")
+    private fun handleNewItem(){
+        debug_msg("handleNewItem not implemented yet")
     }
     private fun handleViewStock(){
         debug_msg("handleViewStock not implemented yet")
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun showOptionsDialog() {
-        val options = arrayOf("Pick-Up (Adding)", "Delivery (Taking Away)",
+        val options = arrayOf("Pick-Up/Delivery", "New Item",
             "View Stock")
 
         var selectedIndex = -1 // optional INVALID choice
@@ -87,8 +87,8 @@ class MainActivity : AppCompatActivity() {
             }
             .setPositiveButton("OK") { dialog, _ ->
                 when (selectedIndex) {
-                    0 -> handlePickup()
-                    1 -> handleDelivery()
+                    0 -> handlePickupDelivery()
+                    1 -> handleNewItem()
                     2 -> handleViewStock()
                 }
                 dialog.dismiss()
@@ -133,9 +133,9 @@ class MainActivity : AppCompatActivity() {
         filename: Item name
         data:
         val sampleData = listOf(
-        listOf("Chair", "Age", "Email"),
-        listOf("Alice", "30", "alice@example.com"),
-        listOf("Bob", "25", "bob@example.com")
+        listOf("0001", "Chair", "+125", "01-28-25"),
+        listOf("0002", "Table", "+50", "01-28-25"),
+        listOf("0003", "Canopy", "+16", "01-28-25")
         )
          */
         val file = File(this.filesDir, filename)
