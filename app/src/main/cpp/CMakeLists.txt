@@ -42,7 +42,16 @@ if(ENABLE_COVERAGE)
 endif()
 
 # Native code library
-add_library(native-lib STATIC native-lib.cpp)
+add_library(
+        native-lib STATIC native-lib.cpp
+)
+
+add_library(
+        InventoryMgmt
+        SHARED
+        InventoryMgmt.cpp
+        sqlite3.c
+)
 
 # GoogleTest
 add_subdirectory(googletest)
