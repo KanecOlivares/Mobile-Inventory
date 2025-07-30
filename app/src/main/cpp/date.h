@@ -9,17 +9,10 @@
 class Date {
     int month, day, year;
 
-    Date(std::string & given_date){
+public:
+    Date(std::string given_date){
         parse_date(given_date);
     }
-
-    void parse_date(std::string &date){
-        // Date follows this format MM-DD-YYYY
-        month = std::stoi(date.substr(0,2));
-        day = std::stoi(date.substr(3, 2));
-        year = std::stoi(date.substr(6, 4));
-    }
-
 
     bool operator>(const Date& other){
         /*
@@ -63,6 +56,14 @@ class Date {
          * If any of them are different then they are not equivalent dates
          */
         return (year != other.year || month != other.month || day != other.day);
+    }
+
+private:
+    void parse_date(std::string &date){
+        // Date follows this format MM-DD-YYYY
+        month = std::stoi(date.substr(0,2));
+        day = std::stoi(date.substr(3, 2));
+        year = std::stoi(date.substr(6, 4));
     }
 };
 

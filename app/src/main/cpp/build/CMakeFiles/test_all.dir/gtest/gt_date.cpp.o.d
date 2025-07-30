@@ -853,4 +853,5 @@ CMakeFiles/test_all.dir/gtest/gt_date.cpp.o: \
   /Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/googletest/googletest/include/gtest/gtest-test-part.h \
   /Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/googletest/googletest/include/gtest/gtest-typed-test.h \
   /Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/googletest/googletest/include/gtest/gtest_pred_impl.h \
-  /Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/googletest/googletest/include/gtest/gtest_prod.h
+  /Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/googletest/googletest/include/gtest/gtest_prod.h \
+  /Users/kanecolivares/AndroidStudioProjects/MobileInventory/app/src/main/cpp/gtest/../date.h
