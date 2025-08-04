@@ -1,4 +1,5 @@
 package com.example.mobileinventory.data
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -7,9 +8,9 @@ import androidx.room.Query
 import androidx.room.Update
 
 @Dao
-interface ItemDOA {
+interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertItem(item: Item)
+    suspend fun addItem(item: Item)
 
     @Delete
     suspend fun deleteItem(item: Item)
@@ -18,5 +19,5 @@ interface ItemDOA {
     suspend fun updateItem(item: Item)
 
     @Query("SELECT * FROM inventory ORDER BY id ASC")
-    suspend fun getAllItems(): List<Item>
+    fun getAllItems(): LiveData<List<Item>>
 }
