@@ -1,2 +1,0 @@
-/usr/bin/ar qc libnative-lib.a "CMakeFiles/native-lib.dir/native-lib.cpp.o"
-/usr/bin/ranlib libnative-lib.a
