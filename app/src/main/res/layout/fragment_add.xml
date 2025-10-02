@@ -38,12 +38,16 @@
         android:id="@+id/addAImage"
         android:layout_width="279dp"
         android:layout_height="316dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="24dp"
         android:src="@drawable/add_a_photo"
+        app:layout_constraintBottom_toTopOf="@+id/inputName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.319"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addButton"
@@ -51,7 +55,7 @@
         android:layout_height="67dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
